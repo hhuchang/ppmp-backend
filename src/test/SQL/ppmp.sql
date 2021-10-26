@@ -42,3 +42,5 @@ create table if not exists `project_detail_tbl` (
 
 
 )engine =InnoDB default charset =utf8mb4;
+
+
