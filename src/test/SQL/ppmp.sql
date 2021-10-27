@@ -7,7 +7,7 @@ create table if not exists `project_tbl` (
     `project_id` int unsigned auto_increment,
     `project_name` VARCHAR(100) NOT NULL ,
     `project_code` varchar(100) not null unique ,
-    `project_manager_id` int ,
+    `manager_id` int ,
     `project_type` int(10),
     `createBy_id` int,
     `created_date` DATETIME,
@@ -42,5 +42,35 @@ create table if not exists `project_detail_tbl` (
 
 
 )engine =InnoDB default charset =utf8mb4;
+
+
+
+create table if not exists `user_tbl` (
+      `id` int unsigned auto_increment primary key ,
+      `user_name` VARCHAR(100) NOT NULL unique,
+      `real_name` varchar(100) not null  ,
+      `created_date` DATETIME,
+      `update_date` DATETIME,
+      `avatar` varchar(100),
+      `status` int(10),
+      `remarks` text
+
+)engine =InnoDB default charset =utf8mb4;
+
+create table if not exists `project_status` (
+    `id` int unsigned auto_increment primary key ,
+    `status_name` VARCHAR(100) NOT NULL unique
+
+
+)engine =InnoDB default charset =utf8mb4;
+
+create table if not exists `project_type` (
+    `id` int unsigned auto_increment primary key ,
+    `type_name` VARCHAR(100) NOT NULL unique
+)engine =InnoDB default charset =utf8mb4;
+
+insert into project_status(id,status_code,status_name) values (10001,"created","已创建");
+
+created,initialized,processing,closed
 
 

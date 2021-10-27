@@ -1,4 +1,4 @@
-package cc.c2appstore.model;
+package cc.c2appstore.model.entity;
 
 import java.io.Serializable;
 

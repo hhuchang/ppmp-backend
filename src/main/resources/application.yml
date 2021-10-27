@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://192.168.198.131:3306/ass?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
-    username: rootcc123
-    password: root123
+    url: jdbc:mysql://127.0.0.1:3306/ppmp?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     active: dev
