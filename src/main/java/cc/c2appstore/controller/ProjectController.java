@@ -42,13 +42,13 @@ import java.util.Locale;
  * }
  */
 @RestController
-@RequestMapping("/project")
+//@RequestMapping("/project")
 public class ProjectController {
 
     @Autowired
     private ProjectMapper projectMapper;
 
-    @GetMapping("/list")
+    @GetMapping("/project")
     public ProjectVo list(@Nullable @RequestBody(required = false) ProjectListQueryDTO params){
 
 
