@@ -21,8 +21,25 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author: changcan
- * @date: 2021/10/25 23:24
+ * @author changcan
+ * @date 2021/10/25 23:24
+ *
+
+ * {
+ *   current: 2,
+ *   pageSize: 20
+ *   filter: {
+ *   status:[ "created", "initialized" ]
+ *   }
+ *   projectCode: "code"
+ *   projectName: "name"
+ *   searchEndTime: ’2021-10-22 00:00:00‘
+ *   searchStartTime: ”2021-11-22 00:00:00“
+ *   sorter: {
+ *      createAt: "ascend",
+ *      projectName: "descend"
+ *   }
+ * }
  */
 @RestController
 @RequestMapping("/project")
@@ -36,79 +53,65 @@ public class ProjectController {
 
 
 
-        Integer current=params.getCurrent();
-        Integer pageSize= params.getPageSize();
-
-        Page<Project> pageProject=new Page<>(current,pageSize);
-
+        Page<Project> pageProject;
 
         QueryWrapper<Project> queryWrapper=new QueryWrapper<>();
-        /**
-         * {
-         *   current: 2,
-         *   pageSize: 20
-         *   filter: {
-         *   status:[ "created", "initialized" ]
-         *   }
-         *   projectCode: "code"
-         *   projectName: "name"
-         *   searchEndTime: ’2021-10-22 00:00:00‘
-         *   searchStartTime: ”2021-11-22 00:00:00“
-         *   sorter: {
-         *      createAt: "ascend",
-         *      projectName: "descend"
-         *   }
-         * }
-         */
+        if (params!=null) {
+            Integer current = params.getCurrent();
+            Integer pageSize = params.getPageSize();
+
+            pageProject = new Page<>(current == null ? 1 : current, pageSize == null ? 10 : pageSize);
 
 
-//        if (params.getFilter()!=null&&params.getFilter().getStatus()!=null){
-//
-//        }
-        String projectCode=params.getProjectCode();
-        String projectName= params.getProjectName();
-        String searchStartTime=params.getSearchStartTime();
-        String searchEndTime=params.getSearchEndTime();
 
-        Sorter sorter=params.getSorter();
-        if(sorter!=null){
-            String createAtSort= sorter.getCreateAt();
-            if(!StringUtils.isEmpty(createAtSort)){
-                queryWrapper.orderBy(true,createAtSort.substring(0,createAtSort.length()-3).toLowerCase().equals("asc")?true:false,"created_date");
 
+            String projectCode=params.getProjectCode();
+            String projectName= params.getProjectName();
+            String searchStartTime=params.getSearchStartTime();
+            String searchEndTime=params.getSearchEndTime();
+
+            Sorter sorter=params.getSorter();
+            if(sorter!=null){
+                String createAtSort= sorter.getCreateAt();
+                if(!StringUtils.isEmpty(createAtSort)){
+                    queryWrapper.orderBy(true,createAtSort.substring(0,createAtSort.length()-3).equalsIgnoreCase("asc"),"created_date");
+
+                }
+                String projectNameSort=sorter.getProjectName();
+                if (!StringUtils.isEmpty(projectNameSort)){
+                    queryWrapper.orderBy(true,projectNameSort.substring(0,projectNameSort.length()-3).equalsIgnoreCase("asc"),"project_name");
+
+                }
             }
-            String projectNameSort=sorter.getProjectName();
-            if (!StringUtils.isEmpty(projectNameSort)){
-                queryWrapper.orderBy(true,projectNameSort.substring(0,projectNameSort.length()-3).toLowerCase().equals("asc")?true:false,"project_name");
 
+            if(!StringUtils.isEmpty(projectCode)){
+                queryWrapper.like("project_code",projectCode);
             }
-        }
+            if(!StringUtils.isEmpty(projectName)){
+                queryWrapper.like("project_name",projectName);
+            }
+            if(!StringUtils.isEmpty(searchStartTime)){
+                queryWrapper.ge("created_date",searchStartTime);
+            }
+            if(!StringUtils.isEmpty(searchEndTime)){
+                queryWrapper.le("created_date",searchEndTime);
+            }
 
-        if(!StringUtils.isEmpty(projectCode)){
-            queryWrapper.like("project_code",projectCode);
+        }else{
+            pageProject=new Page<>(1,10);
         }
-        if(!StringUtils.isEmpty(projectName)){
-            queryWrapper.like("project_name",projectName);
-        }
-        if(!StringUtils.isEmpty(searchStartTime)){
-            queryWrapper.ge("created_date",searchStartTime);
-        }
-        if(!StringUtils.isEmpty(searchEndTime)){
-            queryWrapper.le("created_date",searchEndTime);
-        }
-
 
 
         IPage<Project> projectPage=projectMapper.selectPage(pageProject,queryWrapper);
 
         ProjectVo vo=new ProjectVo();
-        vo.setCurrent(current);
-        vo.setPageSize(pageSize);
+        vo.setCurrent(projectPage.getCurrent());
+        vo.setPageSize(projectPage.getSize());
         vo.setTotal(projectPage.getTotal());
         vo.setData(projectPage.getRecords());
 
         return vo;
-        //return projectMapper.selectList(queryWrapper);
+
 
     }
 }

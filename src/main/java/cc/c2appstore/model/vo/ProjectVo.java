@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 public class ProjectVo {
-    private Integer current;
-    private Integer pageSize;
+    private Long current;
+    private Long pageSize;
     private Long total;
     private List<Project> data;
 }
