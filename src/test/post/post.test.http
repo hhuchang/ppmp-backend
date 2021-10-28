@@ -50,4 +50,63 @@ Content-Type: application/json
 #
 ####
 
+GET http://127.0.0.1:8080/project
+Content-Type: application/json
+
+{
+
+  "projectCode": "code",
+  "projectName": "名称",
+  "searchStartTime": "2021-10-12 00:00:00",
+  "searchEndTime":"2021-10-27 09:55:00",
+  "sorter": {
+    "createAt": "ascend",
+    "projectName": "descend"
+  }
+
+}
+
+<> 2021-10-27T230011.200.json
+<> 2021-10-27T221508.200.json
+<> 2021-10-27T221501.200.json
+<> 2021-10-27T221440.200.json
+<> 2021-10-27T221415.200.json
+<> 2021-10-27T221329.200.json
+<> 2021-10-27T221322.200.json
+<> 2021-10-27T221254.200.json
+<> 2021-10-27T221232.200.json
+<> 2021-10-27T221054.200.json
+<> 2021-10-27T221043.200.json
+<> 2021-10-27T220957.200.json
+<> 2021-10-27T220916.200.json
+<> 2021-10-27T220725.200.json
+<> 2021-10-27T220707.200.json
+<> 2021-10-27T220651.200.json
+<> 2021-10-27T220558.200.json
+<> 2021-10-27T220207.200.json
+<> 2021-10-27T215832.500.json
+<> 2021-10-27T215628.200.json
+<> 2021-10-27T215541.200.json
+<> 2021-10-27T215413.500.json
+<> 2021-10-27T215402.405.json
+
+###
+POST http://221.226.92.38:5000/api/project/basicList
+Content-Type: application/json
+
+{
+  "current": 1,
+  "pageSize": 20,
+  "filter": {
+    "status":[ "created", "initialized" ]
+  },
+  "projectCode": "code",
+  "projectName": "name",
+  "searchEndTime": "2021-10-22 00:00:00",
+  "searchStartTime": "2021-11-22 00:00:00",
+  "sorter": {
+    "createAt": "ascend",
+    "projectName": "descend"
+  }
+}
 
