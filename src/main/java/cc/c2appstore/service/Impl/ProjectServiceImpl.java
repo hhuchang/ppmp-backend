@@ -4,7 +4,7 @@ import cc.c2appstore.mapper.ProjectMapper;
 import cc.c2appstore.model.dto.ProjectListQueryDTO;
 import cc.c2appstore.model.dto.Sorter;
 import cc.c2appstore.model.entity.Project;
-import cc.c2appstore.model.vo.ProjectVo;
+import cc.c2appstore.model.vo.ProjectListVo;
 import cc.c2appstore.service.ProjectService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -23,7 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectVo selectPage(ProjectListQueryDTO params) {
+    public ProjectListVo selectPage(ProjectListQueryDTO params) {
         Page<Project> pageProject;
 
         QueryWrapper<Project> queryWrapper=new QueryWrapper<>();
@@ -66,18 +66,33 @@ public class ProjectServiceImpl implements ProjectService {
             }
 
         }else{
-            pageProject=new Page<>(1,10);
+            pageProject=new Page<>(1,10);//如果没有制定 页码和和检查
         }
 
 
         IPage<Project> projectPage=projectMapper.selectPage(pageProject,queryWrapper);
 
-        ProjectVo vo=new ProjectVo();
+        ProjectListVo vo=new ProjectListVo();
         vo.setCurrent(projectPage.getCurrent());
         vo.setPageSize(projectPage.getSize());
         vo.setTotal(projectPage.getTotal());
         vo.setData(projectPage.getRecords());
 
         return vo;
+    }
+
+    @Override
+    public int add(Project project) {
+        return projectMapper.insert(project);
+    }
+
+    @Override
+    public int update(Project project) {
+        return projectMapper.updateById(project);
+    }
+
+    @Override
+    public Project selectById(Integer pid) {
+        return projectMapper.selectById(pid);
     }
 }

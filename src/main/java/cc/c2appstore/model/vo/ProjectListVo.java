@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ProjectVo {
+public class ProjectListVo {
     private Long current;
     private Long pageSize;
     private Long total;

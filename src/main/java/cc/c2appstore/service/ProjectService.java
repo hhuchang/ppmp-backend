@@ -1,8 +1,8 @@
 package cc.c2appstore.service;
 
 import cc.c2appstore.model.dto.ProjectListQueryDTO;
-import cc.c2appstore.model.vo.ProjectVo;
-import org.springframework.stereotype.Service;
+import cc.c2appstore.model.entity.Project;
+import cc.c2appstore.model.vo.ProjectListVo;
 
 /**
  * @author: changcan
@@ -11,5 +11,11 @@ import org.springframework.stereotype.Service;
 
 public interface ProjectService {
 
-    ProjectVo selectPage(ProjectListQueryDTO params);
+    ProjectListVo selectPage(ProjectListQueryDTO params);
+
+    int add(Project project);
+
+    int update(Project project);
+
+    Project selectById(Integer pid);
 }

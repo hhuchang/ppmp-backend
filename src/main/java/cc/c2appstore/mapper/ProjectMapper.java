@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,4 +19,8 @@ import java.util.List;
 public interface ProjectMapper extends BaseMapper<Project> {
 
     IPage<Project> selectPage(Page<Project> page, @Param(Constants.WRAPPER) Wrapper<Project> queryWrapper);
+
+
+
+    //Project selectById(@Param("project_id") Integer project_id);
 }

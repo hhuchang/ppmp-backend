@@ -36,6 +36,10 @@
         select * from `project_tbl` ${ew.customSqlSegment}
     </select>
 
+    <select id="selectById" resultMap="projectResultMap">
+        select * from `project_tbl` where project_id=#{project_id}
+    </select>
+
 
 
 </mapper>
