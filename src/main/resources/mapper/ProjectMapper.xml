@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.c2appstore.mapper.ProjectMapper">
+
+
+    <resultMap id="projectResultMap" type="cc.c2appstore.model.entity.Project">
+        <result column="manager_id" property="managerId" />
+        <association property="manager" javaType="cc.c2appstore.model.entity.User"
+                     select="cc.c2appstore.mapper.UserMapper.selectById"
+                     column="manager_id">
+
+<!--            <id column="id" property="id"/>-->
+<!--            <id column="real_name" property="realName"/>-->
+        </association>
+        <!--association 定义关联对象的封装规则
+            select  当前属性 是调用select 指定的方法查询出来的结果
+            column  有了select 一定要求column 表示 将哪一列的值传递给这个方法  即中选取
+             project_tbl 表manage_id 列的值  用来向select 查询
+            将查询出来的结果，封装  给property 制定的属性  即manager
+            -->
+        <association property="createBy" javaType="cc.c2appstore.model.entity.User"
+                     select="cc.c2appstore.mapper.UserMapper.selectById"
+                     column="createBy_id">
+
+        </association>
+        <association property="type" javaType="cc.c2appstore.model.entity.ProjectType"
+                     select="cc.c2appstore.mapper.ProjectTypeMapper.selectById"
+                     column="project_type_id"/>
+
+
+    </resultMap>
+
+    <select id="selectPage" resultMap="projectResultMap">
+        select * from `project_tbl` ${ew.customSqlSegment}
+    </select>
+
+
+
+</mapper>

@@ -3,7 +3,9 @@ package cc.c2appstore.mapper;
 import cc.c2appstore.model.entity.Project;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,19 +17,5 @@ import java.util.List;
 @Mapper
 public interface ProjectMapper extends BaseMapper<Project> {
 
-
-    @Results({
-            @Result(column = "manager_id",property = "manager",
-                    one = @One(select = "cc.c2appstore.mapper.UserMapper.selectById")),
-            @Result(column = "project_type_id",property = "type",
-                    one = @One(select = "cc.c2appstore.mapper.ProjectTypeMapper.selectById")),
-            @Result(column = "createBy_id",property = "createBy",
-                    one = @One(select = "cc.c2appstore.mapper.UserMapper.selectById")),
-            @Result(column = "status_id",property = "status",
-                    one = @One(select = "cc.c2appstore.mapper.ProjectStatusMapper.selectById")),
-    })
-    @Select("select * from project_tbl")
-    List<Project> selectList(@Param(Constants.WRAPPER) Wrapper<Project> queryWrapper);
-
-
+    IPage<Project> selectPage(Page<Project> page, @Param(Constants.WRAPPER) Wrapper<Project> queryWrapper);
 }
