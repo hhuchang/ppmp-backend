@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.c2appstore.mapper.JobUserMapper">
+
+
+    <resultMap id="jobUserResultMap" type="cc.c2appstore.model.entity.JobUser">
+        <result column="job_id" property="jobId" />
+        <association property="job" javaType="cc.c2appstore.model.entity.Job"
+                    select="cc.c2appstore.mapper.JobMapper.selectById"
+                    column="job_id">
+
+        </association>
+
+
+        <collection property="user" ofType="cc.c2appstore.model.entity.User"
+                    select="cc.c2appstore.mapper.UserMapper.selectById"
+                    column="user_id">
+
+        </collection>
+
+
+
+
+    </resultMap>
+
+
+    <select id="selectById" resultMap="jobUserResultMap">
+        select * from job_user where id=#{id}
+    </select>
+
+
+
+</mapper>

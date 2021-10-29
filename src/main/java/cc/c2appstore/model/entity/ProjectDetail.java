@@ -2,13 +2,14 @@ package cc.c2appstore.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * @author: changcan
- * @date: 2021/10/23 0:26
+ * @author changcan
+ * @date 2021/10/23 0:26
  *
  *
  *
@@ -51,7 +52,50 @@ public class ProjectDetail implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
+
     private Long projectId;
+
+    @JsonIgnore
+    private Long screenBrandId;
+    private ScreenBrand screenBrand;
+
+    private String screenCode;
+    private String ocGrade;
+    private String tcon;
+    private String tconBrand;
+
+    @JsonIgnore
+    private Long backlightId;
+    private Backlight backlight;
+
+
+    @JsonIgnore
+    private Long diffuserPlateId;
+    private DiffuserPlate diffuserPlate;
+
+    private String shell;
+    private String shellBrand;
+    private String base;
+
+    private String boardCode;
+
+    @JsonIgnore
+    private Long specificationFileId;
+    private Document specification;
+
+    private String storage;
+    private String port;
+
+    private String osVersion;
+    private String operator;
+    private String pqVersion;
+    private String appstore;
+    private String preInstall;
+    private String androidVersion;
+    private String launcher;
+    private String boot;
+
+
 
 
 

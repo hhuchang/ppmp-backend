@@ -9,8 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author: changcan
- * @date: 2021/10/26 0:05
+ * @author changcan
+ * @date 2021/10/26 0:05
+ *
+ *
+ *
+ *
  */
 @Data
 @TableName("user_tbl")
@@ -25,7 +29,9 @@ public class User implements Serializable {
     private Date createdDate;
     private Date updateDate;
 
-    //private Integer status;
+    private Date lastLogin;
+
+    private Integer status;
 
     //private String remarks;
 
