@@ -27,7 +27,7 @@ public class TeamController {
      */
 
     @GetMapping("/{pid}")
-    public List<JobUser> selectByProductId(@PathVariable("pid") Long project_id){
+    public List<Team> selectByProductId(@PathVariable("pid") Long project_id){
         return teamService.selectByProductId(project_id);
 
 
