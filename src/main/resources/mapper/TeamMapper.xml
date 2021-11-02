@@ -6,11 +6,19 @@
 
 
     <resultMap id="teamResultMap" type="cc.c2appstore.model.entity.Team">
-        <result column="job_user_id" property="jobUserId" />
+        <result column="id" property="id"/>
+        <result column="job_id" property="jobId" />
+        <association property="job" javaType="cc.c2appstore.model.entity.Job"
+                     select="cc.c2appstore.mapper.JobMapper.selectById"
+                     column="job_id">
 
-        <collection property="jobUser" ofType="cc.c2appstore.model.entity.JobUser"
-                    select="cc.c2appstore.mapper.JobUserMapper.selectById"
-                    column="job_user_id">
+        </association>
+
+
+
+        <collection property="jobUsers" ofType="cc.c2appstore.model.entity.JobUser"
+                    select="cc.c2appstore.mapper.JobUserMapper.selectByTeamId"
+                    column="id">
 
         </collection>
 

@@ -29,7 +29,7 @@ CREATE TABLE `job` (
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `jbo_code` (`job_code`)
+  UNIQUE KEY `job_code` (`job_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,13 +47,13 @@ UNLOCK TABLES;
 -- Table structure for table `job_user`
 --
 
-DROP TABLE IF EXISTS job_user;
+DROP TABLE IF EXISTS `job_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `job_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `job_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -64,10 +64,10 @@ CREATE TABLE `job_user` (
 -- Dumping data for table `job_user`
 --
 
-LOCK TABLES job_user WRITE;
-/*!40000 ALTER TABLE job_user DISABLE KEYS */;
-INSERT INTO job_user VALUES (1,1,1,'2021-10-29 14:10:57',NULL),(2,3,3,'2021-10-29 14:12:21',NULL),(3,3,4,'2021-10-29 14:22:11',NULL);
-/*!40000 ALTER TABLE job_user ENABLE KEYS */;
+LOCK TABLES `job_user` WRITE;
+/*!40000 ALTER TABLE `job_user` DISABLE KEYS */;
+INSERT INTO `job_user` VALUES (1,1,2,'2021-10-29 14:10:57','2021-11-01 09:13:50'),(2,2,3,'2021-10-29 14:12:21','2021-11-01 09:39:26'),(3,2,4,'2021-10-29 14:22:11','2021-11-01 09:39:26');
+/*!40000 ALTER TABLE `job_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -174,7 +174,7 @@ DROP TABLE IF EXISTS `team`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `job_user_id` int(11) NOT NULL,
+  `job_id` int(11) DEFAULT NULL,
   `project_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -188,7 +188,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,1,10,'2021-10-29 14:09:40',NULL),(2,2,10,'2021-10-29 14:10:06',NULL),(3,3,10,'2021-10-29 14:10:18',NULL);
+INSERT INTO `team` VALUES (1,1,10,'2021-10-29 14:09:40','2021-11-01 09:12:43'),(2,3,10,'2021-10-29 14:10:06','2021-11-01 09:39:09');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-29 16:34:03
+-- Dump completed on 2021-11-01  9:57:45

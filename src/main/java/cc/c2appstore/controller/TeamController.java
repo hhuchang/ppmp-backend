@@ -1,6 +1,6 @@
 package cc.c2appstore.controller;
 
-import cc.c2appstore.model.entity.JobUser;
+
 import cc.c2appstore.model.entity.Team;
 import cc.c2appstore.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/team")
 public class TeamController {
 
-    @Autowired
+
     private TeamService teamService;
+    @Autowired
+    public void setTeamService(TeamService teamService) {
+        this.teamService = teamService;
+    }
 
     /**
      * 将 人员可以  变动  增加职位 增加 人员

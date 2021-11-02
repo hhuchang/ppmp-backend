@@ -9,4 +9,5 @@ import java.io.Serializable;
 public interface JobUserMapper extends BaseMapper<JobUser> {
 
     JobUser selectById(Serializable id);
+    JobUser selectByTeamId(Serializable team_id);
 }

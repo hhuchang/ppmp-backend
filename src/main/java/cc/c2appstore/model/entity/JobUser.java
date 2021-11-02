@@ -11,10 +11,9 @@ public class JobUser {
     private Long id;
 
     @JsonIgnore
-    private Long jobId;
+    private Long teamId;
 
-    @TableField(exist = false)
-    private Job job;
+
 
     @JsonIgnore
     private Long userId;
