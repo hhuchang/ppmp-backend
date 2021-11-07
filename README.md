@@ -18,3 +18,8 @@ mysql优化
 
 
 
+文档下载 详情 创建者 上传时间  /父_父/父/当前文件名
+
+如果时file 当不改变 当请求 children的时候  才去 修改currentPath
+
+
