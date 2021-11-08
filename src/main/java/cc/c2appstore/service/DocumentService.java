@@ -1,7 +1,7 @@
 package cc.c2appstore.service;
 
 import cc.c2appstore.model.entity.Document;
-import org.springframework.http.ResponseEntity;
+import cc.c2appstore.model.vo.DocTreeVo;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface DocumentService {
     List<Document> listByProjectIdAndParentId(Long projectId, Long parentId);
+
+    List<DocTreeVo> getTreeByProjectId(Long project_id);
 }

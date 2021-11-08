@@ -1,6 +1,7 @@
 package cc.c2appstore.mapper;
 
 import cc.c2appstore.model.entity.Document;
+import cc.c2appstore.model.vo.DocTreeVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,4 +17,6 @@ public interface DocumentMapper extends BaseMapper<Document> {
 
 
     List<Document> listByProjectIdAndParentId(Long project_id, Long parent_id);
+
+
 }
